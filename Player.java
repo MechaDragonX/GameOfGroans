@@ -17,6 +17,10 @@ public class Player {
 
     private Random rand = new Random();;
 
+    private void setPlayerClass(String playerClass) {
+        this.playerClass = playerClass;
+    }
+
     /* Hits the targeted Monster */
     public void attack(Monster target) {
         if (playerClass.equals("Thief")) { //need to know which monster has what amount of health so that the limits of the monsters health are known
