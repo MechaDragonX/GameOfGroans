@@ -1,4 +1,4 @@
-import java.util.Random;
+mport java.util.Random;
 
 public class Monster {
 	/* Current health of this Monster */
