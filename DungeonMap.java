@@ -10,7 +10,8 @@ public class DungeonMap {
 
     /* Initializes the rooms and shared Player reference */
     public DungeonMap (int rows, int columns, Player player){
-
+        rooms = new Room[rows][columns];
+        this.player = player;
     }
 
     /* Displays the dungeon's rooms, walls,
