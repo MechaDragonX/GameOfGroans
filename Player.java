@@ -24,10 +24,12 @@ public class Player {
     /* Hits the targeted Monster */
     public void attack(Monster target) {
         if (playerClass.equals("Thief")) { //need to know which monster has what amount of health so that the limits of the monsters health are known
-
+            damage = rand.nextInt((40 - 15)) + 15;
+            health -= damage;
         }
         else if (playerClass.equals("Warrior")) {
-
+            damage = rand.nextInt((60 - 20)) + 20;
+            health -= damage;
         }
     }
 
