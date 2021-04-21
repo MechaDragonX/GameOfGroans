@@ -1,7 +1,5 @@
 import java.util.Random;
 
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable.BinaryOp.Or;
-
 public class Monster {
 
     private final int DENEKE_HEALTH = 55;
@@ -11,9 +9,10 @@ public class Monster {
 
 	/* Current health of this Monster */
     private int health;
-
+    
     /* Max damage this Monster inflicts */
     private int damage;
+    
 
     /* Type of this Monster */
     private String monsterType;
@@ -45,6 +44,20 @@ public class Monster {
         
         this.health = health;
         }
+    }
+
+    public String getMonsterType() {
+        return monsterType;
+    }
+    public void setMonsterType(String monsterType) {
+        this.monsterType = monsterType;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 
     /* Hits the targeted Player */
