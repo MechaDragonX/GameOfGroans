@@ -12,10 +12,20 @@ public class Player {
     /* Class of this Player */
     private String playerClass;
 
+    private Point2d position;
+
     /* Modifer to loot obtained by this Player */
     private double lootModifier = 0;
 
     private Random rand = new Random();;
+
+    public void setPosition(Point2d position) {
+        this.position = position;
+    }
+
+    public Point2d getPosition() {
+        return position;
+    }
 
     private void setPlayerClass(String playerClass) {
         this.playerClass = playerClass;
@@ -25,11 +35,23 @@ public class Player {
     public void attack(Monster target) {
         if (playerClass.equals("Thief")) { //need to know which monster has what amount of health so that the limits of the monsters health are known
             damage = rand.nextInt((40 - 15)) + 15;
+            target.getHealth();
             health -= damage;
+            target.setHealth(health);
+            if (health <= 0) {
+                System.out.println("the " + target.getMonsterType() + " has been slain");
+            }
+
         }
         else if (playerClass.equals("Warrior")) {
             damage = rand.nextInt((60 - 20)) + 20;
+            target.getHealth();
             health -= damage;
+            target.setHealth(health);
+            if (health <= 0) {
+                System.out.println("the " + target.getMonsterType() + " has been slain");
+            }
+
         }
     }
 
