@@ -33,7 +33,7 @@ public class Room {
     public Room() {
         // Roll a random number between 0 and 3 (exclusive) for the room type
         int randomValue = rng.nextInt(3);
-        switch(randomValue) {
+        switch (randomValue) {
             case 0:
                 type = RoomType.Standard;
                 itemType = ItemType.None;
@@ -49,10 +49,10 @@ public class Room {
                 break;
         }
 
-        if(type == RoomType.Item) {
+        if (type == RoomType.Item) {
             // Reuse the same variable to roll a number between 1 and 3 (exclusive) for the item type
             randomValue = rng.nextInt(2) + 1;
-            switch(randomValue) {
+            switch (randomValue) {
                 case 1:
                     itemType = ItemType.Gold;
                     // Roll a number between 1 and 51 (exclusive) for the amount of gold
@@ -63,10 +63,10 @@ public class Room {
                     gold = 0;
                     break;
             }
-        } else if(type == RoomType.Monster) {
+        } else if (type == RoomType.Monster) {
             // Reuse the same variable to roll a number between 0 and 4 (exclusive) for the monster type
             randomValue = rng.nextInt(4);
-            switch(randomValue) {
+            switch (randomValue) {
                 case 0:
                     monster = new Monster("Goblin");
                     break;
@@ -93,12 +93,12 @@ public class Room {
 	and obtaining loot. */
     public void enter(Scanner scanner, Player player) {
         System.out.println("You open a door and move through ...");
-        if(visited) {
+        if (visited) {
             System.out.println("You have already visited this room...");
             return;
         }
 
-        switch(type) {
+        switch (type) {
             case Item:
                 pickUpItem(player);
                 break;
@@ -111,7 +111,7 @@ public class Room {
         }
     }
     private void pickUpItem(Player player) {
-        if(itemType == ItemType.Gold) {
+        if (itemType == ItemType.Gold) {
             player.setGold(player.getGold() + gold);
             System.out.printf("You find a bag of %d gold pieces!!\n", gold);
         } else {
@@ -124,7 +124,7 @@ public class Room {
         
         int input = 0;
         boolean exited = false;
-        while(!exited) {
+        while (!exited) {
             System.out.print("Select an action: [1] Attack\n[2] Run\n==> ");
             input = scanner.nextInt();
             if(input == 1 || input == 2)
@@ -133,7 +133,7 @@ public class Room {
                 System.out.println("Please type [1] or [2]!");
         }
         
-        if(input == 1) {
+        if (input == 1) {
             battle(player);
         } else {
             System.out.println("You try to run ...");
@@ -148,7 +148,7 @@ public class Room {
     private void battle(Player player) {
         // Ambush or not?
         int randomValue = rng.nextInt(2);
-        if(randomValue == 0) {
+        if (randomValue == 0) {
             System.out.printf("The %s attacks and hits you for %d damage!", monster.getMonsterType(), monster.attack(player));
             System.out.printf("You attack and hit the %s for %d damage.", monster.getMonsterType(), player.attack(monster));
         } else {
