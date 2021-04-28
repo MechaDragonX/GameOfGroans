@@ -32,7 +32,7 @@ public class Player {
     }
 
     /* Hits the targeted Monster */
-    public void attack(Monster target) {
+    public int attack(Monster target) {
         if (playerClass.equals("Thief")) { //need to know which monster has what amount of health so that the limits of the monsters health are known
             damage = rand.nextInt((40 - 15)) + 15;
             target.getHealth();
@@ -41,7 +41,6 @@ public class Player {
             if (health <= 0) {
                 System.out.println("the " + target.getMonsterType() + " has been slain");
             }
-
         }
         else if (playerClass.equals("Warrior")) {
             damage = rand.nextInt((60 - 20)) + 20;
@@ -51,8 +50,8 @@ public class Player {
             if (health <= 0) {
                 System.out.println("the " + target.getMonsterType() + " has been slain");
             }
-
         }
+        return damage;
     }
 
 	/* Removes health from this Player
