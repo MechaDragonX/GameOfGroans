@@ -62,7 +62,7 @@ public class Monster {
         }
     }
 
-    public getMaxHealth() {
+    public int getMaxHealth() {
         return maxHealth;
     }
 
