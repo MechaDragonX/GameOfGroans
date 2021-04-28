@@ -1,4 +1,3 @@
-import java.lang.annotation.Target;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -19,10 +18,10 @@ public class Room {
     */
     private RoomType type;
     /*
-        An emum with three possible values:
+        An enum with three possible values:
         0: None
         1: Gold
-        2: Elixr
+        2: Elixir
     */
     private ItemType itemType;
     // Amount of gold
@@ -108,7 +107,7 @@ public class Room {
                 break;
             case Monster:
                  if(monster.getHealth() == monster.getMaxHealth())
-                     initiateEncouter(scanner, player);
+                     initiateEncounter(scanner, player);
                  else
                     battle(player);
                 break;
@@ -127,7 +126,7 @@ public class Room {
             }
         }
     }
-    private void initiateEncouter(Scanner scanner, Player player) {
+    private void initiateEncounter(Scanner scanner, Player player) {
         System.out.printf("A %s appears!!\n\n", monster.getMonsterType());
         
         int input = 0;
