@@ -23,28 +23,28 @@ public class Player {
         positionY = 0;
     }
 
-    private int getHealth() {
+    public int getHealth() {
         return health;
     }
-    private void setHealth(int health) {
+    public void setHealth(int health) {
         this.health = health;
     }
 
-    private int getMaxHealth() {
+    public int getMaxHealth() {
         return maxHealth;
     }
 
-    private int getGold() {
+    public int getGold() {
         return gold;
     }
-    private void setGold(int gold) {
+    public void setGold(int gold) {
         this.gold = gold;
     }
 
-    // private int getDamage() {
+    // public int getDamage() {
     //     return damage;
     // }
-    // private void setDamage(int damage) {
+    // public void setDamage(int damage) {
     //     this.damage = damage;
     // }
 
@@ -53,7 +53,7 @@ public class Player {
     }
     public void setPlayerClass(String playerClass) {
         this.playerClass = playerClass;
-        if (playerClass = "Theif") {
+        if (playerClass.equals("Theif")) {
             health = 80;
         } else {
             health = 100;
@@ -76,7 +76,7 @@ public class Player {
 
     /* Hits the targeted Monster */
     public int attack(Monster target) {
-        int damage;
+        int damage = 0;
         if (playerClass.equals("Thief")) { //need to know which monster has what amount of health so that the limits of the monsters health are known
             damage = rand.nextInt((40 - 15)) + 15;
             target.getHealth();
