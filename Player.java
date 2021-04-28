@@ -27,7 +27,7 @@ public class Player {
         return position;
     }
 
-    private void setPlayerClass(String playerClass) {
+    public void setPlayerClass(String playerClass) {
         this.playerClass = playerClass;
     }
 
