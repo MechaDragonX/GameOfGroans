@@ -32,12 +32,12 @@ public class DungeonGame {
             switch(input) {
                 case "1":
                     exited = true;
-                    // player.setPlayerClass("Warrior");
+                    /player.setPlayerClass("Warrior");
                     System.out.println("You are now a warrior!");
                     break;
                 case "2":
                     exited = true;
-                    // player.setPlayerClass("Theif");
+                    player.setPlayerClass("Theif");
                     System.out.println("You are now a theif!");
                     break;
                 default:
