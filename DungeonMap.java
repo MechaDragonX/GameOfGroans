@@ -54,6 +54,32 @@ public class DungeonMap {
             System.out.print("-");
         System.out.print("+");
     }
-	
-	//TODO: method(s) to move player
+	public void movePlayer(MovementDirection direction) {
+        switch (direction) {
+            case Left:
+                if (player.getPositionY() - 1 == -1)
+                    throw new IndexOutOfBoundsException();
+                else
+                    player.setPositionY(player.getPositionY() - 1);
+                break;
+            case Right:
+                if (player.getPositionY() + 1 == rooms.length)
+                    throw new IndexOutOfBoundsException();
+                else
+                    player.setPositionY(player.getPositionY() + 1);
+                break;
+            case Up:
+                if (player.getPositionX() - 1 == -1)
+                    throw new IndexOutOfBoundsException();
+                else
+                    player.setPositionX(player.getPositionX() - 1);
+                break;
+            case Down:
+                if (player.getPositionX() + 1 == rooms[0].length)
+                    throw new IndexOutOfBoundsException();
+                else
+                    player.setPositionX(player.getPositionX() + 1);
+                break;
+        }
+    }
 }
