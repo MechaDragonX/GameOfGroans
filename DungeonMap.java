@@ -32,8 +32,12 @@ public class DungeonMap {
             for(int j = 0; j < rooms[0].length; j++) {
                 if(rooms[i][j].hasVisited())
                     System.out.print("*");
-                else if(i == player.getPositionX() && j == player.getPositionY())
-                    System.out.print("W");
+                else if(i == player.getPositionX() && j == player.getPositionY()) {
+                    if(player.getPlayerClass() == "Warrior")
+                        System.out.print("W");
+                    else
+                        System.out.print("T");
+                }
                 else
                     System.out.print(" ");
             }
