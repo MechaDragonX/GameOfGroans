@@ -30,6 +30,10 @@ public class Room {
     // The monster present in the room (if there is any)
     private Monster monster;
 
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
     public Room() {
         // Roll a random number between 0 and 3 (exclusive) for the room type
         int randomValue = rng.nextInt(3);
@@ -115,8 +119,12 @@ public class Room {
             player.setGold(player.getGold() + gold);
             System.out.printf("You find a bag of %d gold pieces!!\n", gold);
         } else {
-            player.setHealth(player.getHealth() + 20);
-            System.out.println("You find a healing elixir and are healed by 20 HP!!");
+            if(player.getHealth() == player.getMaxHealth())
+                System.out.println("You find a healing elixir, but you have max HP...");
+            else {
+                player.setHealth(player.getHealth() + 20);
+                System.out.println("You find a healing elixir and are healed by 20 HP!!");
+            }
         }
     }
     private void initiateEncouter(Scanner scanner, Player player) {
@@ -125,7 +133,7 @@ public class Room {
         int input = 0;
         boolean exited = false;
         while (!exited) {
-            System.out.print("Select an action: [1] Attack\n[2] Run\n==> ");
+            System.out.print("Select an action: [1] Attack, [2] Run ==> ");
             input = scanner.nextInt();
             if(input == 1 || input == 2)
                 exited = true;

@@ -1,4 +1,6 @@
-/* Contains the Rooms in the dungeon 
+import java.util.Scanner;
+
+/* Contains the Rooms in the dungeon
 and logic for Player movement */
 public class DungeonMap {
 	/* Rooms in the dungeon */
@@ -29,14 +31,14 @@ public class DungeonMap {
         for (int i = 0; i < rooms.length; i++) {
             System.out.print("|");
             for (int j = 0; j < rooms[0].length; j++) {
-                if (rooms[i][j].hasVisited())
-                    System.out.print("*");
-                else if (i == player.getPositionX() && j == player.getPositionY()) {
-                    if (player.getPlayerClass() == "Warrior")
+                if (i == player.getPositionX() && j == player.getPositionY()) {
+                    if (player.getPlayerClass().equals("Warrior"))
                         System.out.print("W");
                     else
                         System.out.print("T");
                 }
+                else if (rooms[i][j].hasVisited())
+                    System.out.print("*");
                 else
                     System.out.print(" ");
             }
@@ -59,27 +61,39 @@ public class DungeonMap {
             case Left:
                 if (player.getPositionY() - 1 == -1)
                     throw new IndexOutOfBoundsException();
-                else
+                else{
+                    rooms[player.getPositionX()][player.getPositionY()].setVisited(true);
                     player.setPositionY(player.getPositionY() - 1);
+                }
                 break;
             case Right:
                 if (player.getPositionY() + 1 == rooms.length)
                     throw new IndexOutOfBoundsException();
-                else
+                else {
+                    rooms[player.getPositionX()][player.getPositionY()].setVisited(true);
                     player.setPositionY(player.getPositionY() + 1);
+                }
                 break;
             case Up:
                 if (player.getPositionX() - 1 == -1)
                     throw new IndexOutOfBoundsException();
-                else
+                else {
+                    rooms[player.getPositionX()][player.getPositionY()].setVisited(true);
                     player.setPositionX(player.getPositionX() - 1);
+                }
                 break;
             case Down:
                 if (player.getPositionX() + 1 == rooms[0].length)
                     throw new IndexOutOfBoundsException();
-                else
+                else {
+                    rooms[player.getPositionX()][player.getPositionY()].setVisited(true);
                     player.setPositionX(player.getPositionX() + 1);
+                }
                 break;
         }
+    }
+
+    public void enterRoom(Scanner scanner, int x, int y) {
+        rooms[x][y].enter(scanner, player);
     }
 }

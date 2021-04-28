@@ -53,10 +53,12 @@ public class Player {
     }
     public void setPlayerClass(String playerClass) {
         this.playerClass = playerClass;
-        if (playerClass.equals("Theif")) {
+        if (playerClass.equals("Thief")) {
             health = 80;
+            maxHealth = 80;
         } else {
             health = 100;
+            maxHealth = 100;
         }
     }
 
@@ -121,7 +123,7 @@ public class Player {
     //     health += rand.nextInt((maxHP - 5)) + 5; // max heal is the most hp the player can have minus the current amount of health and the min health is 5
     // }
 
-	/* Add extra gold to this Player if theif */
+	/* Add extra gold to this Player if Thief */
     public void loot(int gold) {
         // bonus gold if player chose the thief player class
         if (playerClass.equals("Thief")) {

@@ -93,5 +93,7 @@ public class DungeonGame {
         } catch(IndexOutOfBoundsException e) {
             System.out.println("\nYou can’t move through a wall!");
         }
+
+        map.enterRoom(scanner, player.getPositionX(), player.getPositionY());
     }
 }
