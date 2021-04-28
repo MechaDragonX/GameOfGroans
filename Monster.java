@@ -14,6 +14,8 @@ public class Monster {
    
 	/* Current health of this Monster */
     private int health;
+    // Maximum health for this monster
+    private int maxHealth;
     
     /* Max damage this Monster inflicts */
     private int damage;
@@ -29,31 +31,39 @@ public class Monster {
         switch (this.monsterType) {
             case "Deneke": 
                 health = DENEKE_HEALTH;
+                maxHealth = DENEKE_HEALTH;
                 damage = DENEKE_DAMAGE;
                 break;
             case "Goblin": 
                 health = GOBLIN_HEALTH;
+                maxHealth = GOBLIN_HEALTH;
                 damage = GOBLIN_DAMAGE;
                 break;
             case "Zombie": 
                 health = ZOMBIE_HEALTH;
+                maxHealth = ZOMBIE_HEALTH;
                 damage = ZOMBIE_DAMAGE;
                 break;
             case "Orc": 
                 health = ORC_HEALTH;
+                maxHealth = ORC_HEALTH;
                 damage = ORC_DAMAGE;
                 break;
         }
     }
 
-    public int getHealth(){
+    public int getHealth() {
         return health;
     }
     public void setHealth(int health) {
-        if(this.health > 0){
+        if(this.health > 0) {
         
         this.health = health;
         }
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
     public String getMonsterType() {
@@ -76,8 +86,7 @@ public class Monster {
         
         damage = rand.nextInt(damage) + 1;
         target.setHealth(target.getHealth() - damage);
-        return damage; 
-             
+        return damage;
     }
 
     /* Removes health from this Monster

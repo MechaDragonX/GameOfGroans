@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class DungeonGame {
+    private static Scanner scanner = new Scanner(System.in);
+
     /* Reference to the DungeonMap the Player is in */
     private DungeonMap map;
 
@@ -13,8 +15,18 @@ public class DungeonGame {
 		map = new DungeonMap(rows, columns, player);
 	}
 	
-    public void createPlayer() {
-        Scanner scanner = new Scanner(System.in);
+	/* Main loop of the game, which handles
+	non-combat related user input. Continues
+	until the Player either wins or loses. */
+    public void play() {
+        System.out.println("=================================================\n");
+        System.out.println("You are in a dungeon!!");
+        System.out.println("There are monsters, bags of gold, and healing elixirs in each room.");
+        System.out.println("Can you find 100 gold pieces and pay the evil professor to let you out, before the monsters kill you?\n");
+        createPlayer();
+        System.out.println("\n=================================================\n");
+    }
+    private void createPlayer() {
         String input;
         boolean exited = false;
         
@@ -25,12 +37,12 @@ public class DungeonGame {
             switch(input) {
                 case "1":
                     exited = true;
-                    // player.setPlayerClass("Warrior");
+                    player.setPlayerClass("Warrior");
                     System.out.println("You are now a warrior!");
                     break;
                 case "2":
                     exited = true;
-                    // player.setPlayerClass("Theif");
+                    player.setPlayerClass("Theif");
                     System.out.println("You are now a theif!");
                     break;
                 default:
@@ -38,13 +50,5 @@ public class DungeonGame {
                     break;
             }
         }
-
-        scanner.close();
-    }
-	/* Main loop of the game, which handles
-	non-combat related user input. Continues
-	until the Player either wins or loses. */
-    public void play() {
-
     }
 }
