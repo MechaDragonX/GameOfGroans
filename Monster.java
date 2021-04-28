@@ -70,11 +70,12 @@ public class Monster {
     }
 
     /* Hits the targeted Player */
-    public void attack(Player target) {
+    public int attack(Player target) {
         Random rand = new Random();
         
         damage = rand.nextInt(damage) + 1;
         target.setHealth(target.getHealth() - damage);
+        return damage; 
              
     }
 
