@@ -12,23 +12,81 @@ public class Player {
     /* Class of this Player */
     private String playerClass;
 
+    private int positionX;
+
+    private int positionY;
+
+
     /* Modifer to loot obtained by this Player */
     private double lootModifier = 0;
 
     private Random rand = new Random();;
 
-    private void setPlayerClass(String playerClass) {
+    private void setHealth(int health) {
+        this.health = health;
+    }
+
+    private int getHealth() {
+        return health;
+    }
+
+    private void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    private int getGold() {
+        return gold;
+    }
+
+    private void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    private int getDamage() {
+        return damage;
+    }
+
+    public int getPositionX() {
+        return positionX;
+    }
+
+    public void setPositionX(int positionX) {
+        this.positionX = positionX;
+    }
+
+    public int getPositionY() {
+        return positionY;
+    }
+
+    public void setPositionY(int positionY) {
+        this.positionY = positionY;
+    }
+
+    public void setPlayerClass(String playerClass) {
         this.playerClass = playerClass;
     }
 
     /* Hits the targeted Monster */
-    public void attack(Monster target) {
+    public int attack(Monster target) {
         if (playerClass.equals("Thief")) { //need to know which monster has what amount of health so that the limits of the monsters health are known
-
+            damage = rand.nextInt((40 - 15)) + 15;
+            target.getHealth();
+            health -= damage;
+            target.setHealth(health);
+            if (health <= 0) {
+                System.out.println("the " + target.getMonsterType() + " has been slain");
+            }
         }
         else if (playerClass.equals("Warrior")) {
-
+            damage = rand.nextInt((60 - 20)) + 20;
+            target.getHealth();
+            health -= damage;
+            target.setHealth(health);
+            if (health <= 0) {
+                System.out.println("the " + target.getMonsterType() + " has been slain");
+            }
         }
+        return damage;
     }
 
 	/* Removes health from this Player
