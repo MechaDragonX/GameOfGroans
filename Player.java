@@ -12,19 +12,54 @@ public class Player {
     /* Class of this Player */
     private String playerClass;
 
-    private Point2d position;
+    private int positionX;
+
+    private int positionY;
+
 
     /* Modifer to loot obtained by this Player */
     private double lootModifier = 0;
 
     private Random rand = new Random();;
 
-    public void setPosition(Point2d position) {
-        this.position = position;
+    private void setHealth(int health) {
+        this.health = health;
     }
 
-    public Point2d getPosition() {
-        return position;
+    private int getHealth() {
+        return health;
+    }
+
+    private void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    private int getGold() {
+        return gold;
+    }
+
+    private void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    private int getDamage() {
+        return damage;
+    }
+
+    public int getPositionX() {
+        return positionX;
+    }
+
+    public void setPositionX(int positionX) {
+        this.positionX = positionX;
+    }
+
+    public int getPositionY() {
+        return positionY;
+    }
+
+    public void setPositionY(int positionY) {
+        this.positionY = positionY;
     }
 
     public void setPlayerClass(String playerClass) {
