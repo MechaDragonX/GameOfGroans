@@ -138,32 +138,24 @@ public class Room {
         if(input == 1) {
             battle(player);
         } else {
-            // Able to run?
+            System.out.println("You try to run ...");
+            // Able to run safely?
             int randomValue = rng.nextInt(2);
-            if(randomValue == 0) {
-                System.out.println("You weren't able to run away!");
-                monster.attack(player);
-                // Add attack message
-                player.attack(monster);
-                // Add attack message
-            } else {
+            if(randomValue == 0)
+                System.out.printf("The %s attacks and hits you for %d damage as you escape!", monster.getMonsterType(), monster.attack(player));
+            else
                 System.out.println("You successfully ran away!");
-            }
         }
     }
     private void battle(Player player) {
         // Ambush or not?
         int randomValue = rng.nextInt(2);
         if(randomValue == 0) {
-            monster.attack(player);
-            // Add attack message
-            player.attack(monster);
-            // Add attack message
+            System.out.printf("The %s attacks and hits you for %d damage!", monster.getMonsterType(), monster.attack(player));
+            System.out.printf("You attack and hit the %s for %d damage.", monster.getMonsterType(), player.attack(monster));
         } else {
-            player.attack(monster);
-            // Add attack message
-            monster.attack(player);
-            // Add attack message
+            System.out.printf("You attack and hit the %s for %d damage.", monster.getMonsterType(), player.attack(monster));
+            System.out.printf("The %s attacks and hits you for %d damage!", monster.getMonsterType(), monster.attack(player));
         }
     }
 }
