@@ -21,6 +21,8 @@ public class Room {
         2: Elixr
     */
     private ItemType item;
+    // Amount of gold
+    private int gold;
     // The monster present in the room (if there is any)
     private Monster monster;
 
@@ -55,6 +57,9 @@ public class Room {
                     item = ItemType.Elixr;
                     break;
             }
+            // Roll a number between 1 and 51 (exclusive) for the amount of gold
+            gold = rng.nextInt(51) + 1;
+            monster = null;
         } else if(type == RoomType.Monster) {
             // Reuse the same variable to roll a number between 0 and 4 (exclusive) for the monster type
             randomValue = rng.nextInt(4);
@@ -72,6 +77,7 @@ public class Room {
                     monster = new Monster("Deneke");
                     break;
             }
+            gold = 0;
         }
     }
 
