@@ -3,7 +3,7 @@ import java.util.Random;
 public class Player {
 	/* Current health of this Player */
     private int health;
-    private int maxHelath;
+    private int maxHealth;
     /* Current gold of this Player */
     private int gold;
     // /* Damage this Player inflicts */
@@ -28,6 +28,10 @@ public class Player {
     }
     private void setHealth(int health) {
         this.health = health;
+    }
+
+    private int getMaxHealth() {
+        return maxHealth;
     }
 
     private int getGold() {
