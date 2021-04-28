@@ -2,12 +2,10 @@ import java.lang.annotation.Target;
 import java.util.Random;
 import java.util.Scanner;
 
-import javax.lang.model.util.ElementScanner14;
-
 /* Represents a Room in the Dungeon, where
 encounters with Monsters and Loot occur */
 public class Room {
-    // A seed is passed to the contructor to avoid different instances of random returning the same values
+    // A seed is passed to the constructor to avoid different instances of random returning the same values
     private static Random rng = new Random(48651);
 
     /* Indicates whether or not this Room
@@ -38,32 +36,33 @@ public class Room {
         switch(randomValue) {
             case 0:
                 type = RoomType.Standard;
+                itemType = ItemType.None;
+                monster = null;
                 break;
             case 1:
                 type = RoomType.Item;
+                monster = null;
                 break;
             case 2:
                 type = RoomType.Monster;
+                gold = 0;
                 break;
         }
 
         if(type == RoomType.Item) {
-            // Reuse the same variable to roll a number between 0 and 3 (exclusive) for the item type
-            randomValue = rng.nextInt(3);
+            // Reuse the same variable to roll a number between 1 and 3 (exclusive) for the item type
+            randomValue = rng.nextInt(2) + 1;
             switch(randomValue) {
-                case 0:
-                    itemType = ItemType.None;
-                    break;
                 case 1:
                     itemType = ItemType.Gold;
+                    // Roll a number between 1 and 51 (exclusive) for the amount of gold
+                    gold = rng.nextInt(51) + 1;
                     break;
                 case 2:
                     itemType = ItemType.Elixr;
+                    gold = 0;
                     break;
             }
-            // Roll a number between 1 and 51 (exclusive) for the amount of gold
-            gold = rng.nextInt(51) + 1;
-            monster = null;
         } else if(type == RoomType.Monster) {
             // Reuse the same variable to roll a number between 0 and 4 (exclusive) for the monster type
             randomValue = rng.nextInt(4);
@@ -81,7 +80,6 @@ public class Room {
                     monster = new Monster("Deneke");
                     break;
             }
-            gold = 0;
         }
     }
 
@@ -105,9 +103,9 @@ public class Room {
                 pickUpItem(player);
                 break;
             case Monster:
-                if(monster.getHealth() == monster.getMaxHealth())
-                    initiateEncouter(scanner, player);
-                else
+                 if(monster.getHealth() == monster.getMaxHealth())
+                     initiateEncouter(scanner, player);
+                 else
                     battle(player);
                 break;
         }
@@ -117,7 +115,7 @@ public class Room {
             player.setGold(player.getGold() + gold);
             System.out.printf("You find a bag of %d gold pieces!!\n", gold);
         } else {
-            player.setHelth(player.getHealth() + 20);
+            player.setHealth(player.getHealth() + 20);
             System.out.println("You find a healing elixir and are healed by 20 HP!!");
         }
     }
