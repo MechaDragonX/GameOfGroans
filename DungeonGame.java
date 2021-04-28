@@ -19,10 +19,12 @@ public class DungeonGame {
 	non-combat related user input. Continues
 	until the Player either wins or loses. */
     public void play() {
+        System.out.println("=================================================\n");
         System.out.println("You are in a dungeon!!");
         System.out.println("There are monsters, bags of gold, and healing elixirs in each room.");
         System.out.println("Can you find 100 gold pieces and pay the evil professor to let you out, before the monsters kill you?\n");
         createPlayer();
+        System.out.println("\n=================================================\n");
     }
     private void createPlayer() {
         String input;
