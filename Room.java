@@ -108,7 +108,7 @@ public class Room {
                 if(monster.getHealth() == monster.getMaxHealth())
                     initiateEncouter(scanner, player);
                 else
-                    battle();
+                    battle(player);
                 break;
         }
     }
