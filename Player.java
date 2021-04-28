@@ -1,55 +1,64 @@
 import java.util.Random;
+
 public class Player {
 	/* Current health of this Player */
-    private int health = 0;
-
+    private int health;
+    private int maxHelath;
     /* Current gold of this Player */
-    private int gold = 0;
-
-    /* Damage this Player inflicts */
-    private int damage = 0;
-
+    private int gold;
+    // /* Damage this Player inflicts */
+    // private int damage;
     /* Class of this Player */
     private String playerClass;
-
     private int positionX;
-
     private int positionY;
-
-
-    /* Modifer to loot obtained by this Player */
-    private double lootModifier = 0;
-
+    // /* Modifer to loot obtained by this Player */
+    // private double lootModifier = 0;
     private Random rand = new Random();;
 
-    private void setHealth(int health) {
-        this.health = health;
+    public Player() {
+        gold = 0;
+
+        positionX = 0;
+        positionY = 0;
     }
 
     private int getHealth() {
         return health;
     }
-
-    private void setGold(int gold) {
-        this.gold = gold;
+    private void setHealth(int health) {
+        this.health = health;
     }
 
     private int getGold() {
         return gold;
     }
-
-    private void setDamage(int damage) {
-        this.damage = damage;
+    private void setGold(int gold) {
+        this.gold = gold;
     }
 
-    private int getDamage() {
-        return damage;
+    // private int getDamage() {
+    //     return damage;
+    // }
+    // private void setDamage(int damage) {
+    //     this.damage = damage;
+    // }
+
+    public String getPlayerClass() {
+        return playerClass;
+    }
+    public void setPlayerClass(String playerClass) {
+        this.playerClass = playerClass;
+        if (playerClass = "Theif") {
+            health = 80;
+        } else {
+            health = 100;
+        }
     }
 
     public int getPositionX() {
         return positionX;
     }
-
     public void setPositionX(int positionX) {
         this.positionX = positionX;
     }
@@ -57,17 +66,13 @@ public class Player {
     public int getPositionY() {
         return positionY;
     }
-
     public void setPositionY(int positionY) {
         this.positionY = positionY;
     }
 
-    public void setPlayerClass(String playerClass) {
-        this.playerClass = playerClass;
-    }
-
     /* Hits the targeted Monster */
     public int attack(Monster target) {
+        int damage;
         if (playerClass.equals("Thief")) { //need to know which monster has what amount of health so that the limits of the monsters health are known
             damage = rand.nextInt((40 - 15)) + 15;
             target.getHealth();
@@ -99,29 +104,24 @@ public class Player {
         }
     }
 
-	/* Adds health to this Player when healed */
-    public void onHeal(int health) {
-        int maxHP = 0;
-        if (playerClass.equals("Thief")) {
-            maxHP = 80;
-        }
-        else if (playerClass.equals("Warrior")) {
-            maxHP = 100;
-        }
-        maxHP -= health;
-        health += rand.nextInt((maxHP - 5)) + 5; // max heal is the most hp the player can have minus the current amount of health and the min health is 5
-    }
+	// /* Adds health to this Player when healed */
+    // public void onHeal(int health) {
+    //     int maxHP = 0;
+    //     if (playerClass.equals("Thief")) {
+    //         maxHP = 80;
+    //     }
+    //     else if (playerClass.equals("Warrior")) {
+    //         maxHP = 100;
+    //     }
+    //     maxHP -= health;
+    //     health += rand.nextInt((maxHP - 5)) + 5; // max heal is the most hp the player can have minus the current amount of health and the min health is 5
+    // }
 
-	/* Adds gold to this Player when obtained */
-    public void onLoot(int gold) {
-        gold += rand.nextInt((35 - 10)) + 10;
+	/* Add extra gold to this Player if theif */
+    public void loot(int gold) {
         // bonus gold if player chose the thief player class
         if (playerClass.equals("Thief")) {
             gold += 10;
-        }
-        if (gold > 100) {
-            //need a portion that ends the game
-            System.out.println("Congratulations! You have won!");
         }
     }
 }

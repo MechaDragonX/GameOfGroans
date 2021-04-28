@@ -32,9 +32,9 @@ public class DungeonGame {
         
         System.out.print("Select your class:\n[1] Warrior\n[2] Thief\n==> ");
         
-        while(!exited) {
+        while (!exited) {
             input = scanner.next();
-            switch(input) {
+            switch (input) {
                 case "1":
                     exited = true;
                     player.setPlayerClass("Warrior");
