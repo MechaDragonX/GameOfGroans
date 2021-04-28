@@ -25,6 +25,8 @@ public class DungeonGame {
         System.out.println("Can you find 100 gold pieces and pay the evil professor to let you out, before the monsters kill you?\n");
         createPlayer();
         System.out.println("\n=================================================\n");
+        map.print();
+        System.out.println();
     }
     private void createPlayer() {
         String input;

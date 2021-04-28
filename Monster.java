@@ -84,7 +84,7 @@ public class Monster {
         return damage;
     }
 
-    // /* Removes health from this Monster
+    /* Removes health from this Monster
     // when hit by a Player */
     // public void onHit(int damage) {
     //     health -= damage;
