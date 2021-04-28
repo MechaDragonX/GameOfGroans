@@ -35,7 +35,7 @@ public class DungeonGame {
             switch(input) {
                 case "1":
                     exited = true;
-                    /player.setPlayerClass("Warrior");
+                    player.setPlayerClass("Warrior");
                     System.out.println("You are now a warrior!");
                     break;
                 case "2":
