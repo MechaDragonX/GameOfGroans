@@ -121,8 +121,15 @@ public class Room {
     }
     private void pickUpItem(Player player) {
         if (itemType == ItemType.Gold) {
-            player.setGold(player.getGold() + gold);
-            System.out.printf("You find a bag of %d gold pieces!!\n", gold);
+            if (player.getPlayerClass().equals("Thief"))
+                player.setGold(player.getGold() + gold + 5);
+            else
+                player.setGold(player.getGold() + gold);
+
+            if (player.getPlayerClass().equals("Thief"))
+                System.out.printf("You find a bag of %d gold pieces!! You got 5 more thanks to your superior thievery!\n", gold);
+            else
+                System.out.printf("You find a bag of %d gold pieces!!\n", gold);
         } else {
             if(player.getHealth() == player.getMaxHealth())
                 System.out.println("You find a healing elixir, but you have max HP...");
