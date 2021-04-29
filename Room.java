@@ -96,9 +96,11 @@ public class Room {
 	and obtaining loot. */
     // Return if still in battle or not
     public boolean enter(Scanner scanner, Player player) {
+        // Only print if the player is stil in battle
         if (monster == null || (monster.getHealth() == monster.getMaxHealth()))
             System.out.println("You open a door and move through ...");
 
+        // Only print if the room has been previously visited
         if (visited) {
             System.out.println("You have already visited this room...");
             return false;

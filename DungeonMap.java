@@ -57,6 +57,7 @@ public class DungeonMap {
         System.out.print("+");
     }
 	public void movePlayer(MovementDirection direction) {
+        // Check if the player hits a wall, if not, set the current room as visited, and change the player position.
         switch (direction) {
             case Left:
                 if (player.getPositionY() - 1 == -1)
