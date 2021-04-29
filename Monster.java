@@ -49,11 +49,7 @@ public class Monster {
         return health;
     }
     public void setHealth(int health) {
-        if (this.health > 0) {
-            this.health = health;
-        } else {
-            this.health = 0;
-        }
+        this.health = health;
     }
 
     public int getMaxHealth() {
@@ -84,7 +80,7 @@ public class Monster {
         return damage;
     }
 
-    // /* Removes health from this Monster
+    /* Removes health from this Monster
     // when hit by a Player */
     // public void onHit(int damage) {
     //     health -= damage;

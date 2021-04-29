@@ -1,4 +1,3 @@
-import java.lang.annotation.Target;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -19,16 +18,20 @@ public class Room {
     */
     private RoomType type;
     /*
-        An emum with three possible values:
+        An enum with three possible values:
         0: None
         1: Gold
-        2: Elixr
+        2: Elixir
     */
     private ItemType itemType;
     // Amount of gold
     private int gold;
     // The monster present in the room (if there is any)
     private Monster monster;
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
 
     public Room() {
         // Roll a random number between 0 and 3 (exclusive) for the room type
@@ -91,11 +94,16 @@ public class Room {
 	/* Handles encounter logic when a Player
 	enters this Room. Includes combat resolution
 	and obtaining loot. */
-    public void enter(Scanner scanner, Player player) {
-        System.out.println("You open a door and move through ...");
+    // Return if still in battle or not
+    public boolean enter(Scanner scanner, Player player) {
+        // Only print if the player is stil in battle
+        if (monster == null || (monster.getHealth() == monster.getMaxHealth()))
+            System.out.println("You open a door and move through ...");
+
+        // Only print if the room has been previously visited
         if (visited) {
             System.out.println("You have already visited this room...");
-            return;
+            return false;
         }
 
         switch (type) {
@@ -104,28 +112,34 @@ public class Room {
                 break;
             case Monster:
                  if(monster.getHealth() == monster.getMaxHealth())
-                     initiateEncouter(scanner, player);
+                     return initiateEncounter(scanner, player);
                  else
-                    battle(player);
-                break;
+                    return battle(player);
         }
+
+        return false;
     }
     private void pickUpItem(Player player) {
         if (itemType == ItemType.Gold) {
             player.setGold(player.getGold() + gold);
             System.out.printf("You find a bag of %d gold pieces!!\n", gold);
         } else {
-            player.setHealth(player.getHealth() + 20);
-            System.out.println("You find a healing elixir and are healed by 20 HP!!");
+            if(player.getHealth() == player.getMaxHealth())
+                System.out.println("You find a healing elixir, but you have max HP...");
+            else {
+                player.setHealth(player.getHealth() + 20);
+                System.out.println("You find a healing elixir and are healed by 20 HP!!");
+            }
         }
     }
-    private void initiateEncouter(Scanner scanner, Player player) {
+    // Return if still in battle or not
+    private boolean initiateEncounter(Scanner scanner, Player player) {
         System.out.printf("A %s appears!!\n\n", monster.getMonsterType());
         
         int input = 0;
         boolean exited = false;
         while (!exited) {
-            System.out.print("Select an action: [1] Attack\n[2] Run\n==> ");
+            System.out.print("Select an action: [1] Attack, [2] Run ==> ");
             input = scanner.nextInt();
             if(input == 1 || input == 2)
                 exited = true;
@@ -133,27 +147,43 @@ public class Room {
                 System.out.println("Please type [1] or [2]!");
         }
         
-        if (input == 1) {
-            battle(player);
-        } else {
-            System.out.println("You try to run ...");
-            // Able to run safely?
-            int randomValue = rng.nextInt(2);
-            if(randomValue == 0)
-                System.out.printf("The %s attacks and hits you for %d damage as you escape!", monster.getMonsterType(), monster.attack(player));
-            else
-                System.out.println("You successfully ran away!");
-        }
+        if (input == 1)
+            return battle(player);
+
+        System.out.println("You try to run ...");
+        // Able to run safely?
+        int randomValue = rng.nextInt(2);
+        if(randomValue == 0)
+            System.out.printf("The %s attacks and hits you for %d damage as you escape!\n", monster.getMonsterType(), monster.attack(player));
+        else
+            System.out.println("You successfully ran away!");
+        return false;
     }
-    private void battle(Player player) {
+    // Return if still in battle or not
+    private boolean battle(Player player) {
         // Ambush or not?
         int randomValue = rng.nextInt(2);
         if (randomValue == 0) {
-            System.out.printf("The %s attacks and hits you for %d damage!", monster.getMonsterType(), monster.attack(player));
-            System.out.printf("You attack and hit the %s for %d damage.", monster.getMonsterType(), player.attack(monster));
+            System.out.printf("The %s attacks and hits you for %d damage!\n", monster.getMonsterType(), monster.attack(player));
+            // Cam you counterattack?
+            if (player.getHealth() >= 0)
+                System.out.printf("You attack and hit the %s for %d damage.\n", monster.getMonsterType(), player.attack(monster));
         } else {
-            System.out.printf("You attack and hit the %s for %d damage.", monster.getMonsterType(), player.attack(monster));
-            System.out.printf("The %s attacks and hits you for %d damage!", monster.getMonsterType(), monster.attack(player));
+            System.out.printf("You attack and hit the %s for %d damage.\n", monster.getMonsterType(), player.attack(monster));
+            // Can it counterattack?
+            if(monster.getHealth() >= 0)
+                System.out.printf("The %s attacks and hits you for %d damage!\n", monster.getMonsterType(), monster.attack(player));
         }
+
+        // Did someone die? Otherwise, the battle continues.
+        if (player.getHealth() <= 0) {
+            System.out.println("You died!");
+            return false;
+        } else if (monster.getHealth() <= 0) {
+            System.out.printf("The %s dies!\n", monster.getMonsterType());
+            return false;
+        }
+        else
+            return true;
     }
 }
