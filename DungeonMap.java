@@ -93,7 +93,8 @@ public class DungeonMap {
         }
     }
 
-    public void enterRoom(Scanner scanner, int x, int y) {
-        rooms[x][y].enter(scanner, player);
+    // Return if still in battle or not
+    public boolean enterRoom(Scanner scanner, int x, int y) {
+        return rooms[x][y].enter(scanner, player);
     }
 }

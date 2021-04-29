@@ -49,11 +49,7 @@ public class Monster {
         return health;
     }
     public void setHealth(int health) {
-        if (this.health > 0) {
-            this.health = health;
-        } else {
-            this.health = 0;
-        }
+        this.health = health;
     }
 
     public int getMaxHealth() {

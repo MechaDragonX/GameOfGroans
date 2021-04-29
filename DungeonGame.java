@@ -27,12 +27,30 @@ public class DungeonGame {
         System.out.println("\n=================================================\n");
         
         boolean gameEnd = false;
+        boolean inBattle = false;
         while (!gameEnd) {
             map.print();
-            pollMovement();
+
+            if (!inBattle)
+                inBattle = pollMovement();
+            else
+                inBattle = battle();
+
+            if (player.getHealth() <= 0) {
+                System.out.println("Game Over!!");
+                gameEnd = true;
+            } else if (player.getGold() >= 100) {
+                System.out.println("You've collected 100 gold piece!!\nYou win!!");
+                gameEnd = true;
+            }
+
+            System.out.print("\nType anything to continue ==> ");
+            scanner.next();
+
             System.out.println("\n=================================================\n");
         }
     }
+
     private void createPlayer() {
         String input;
         boolean exited = false;
@@ -57,8 +75,10 @@ public class DungeonGame {
             }
         }
     }
-    private void pollMovement() {
+    // Return if still in battle
+    private boolean pollMovement() {
         boolean exited = false;
+        boolean inBattle = false;
         String input;
 
         System.out.print("\n\nSelect a door: [W] up, [S] down, [A] left, [D] right ==> ");
@@ -67,33 +87,42 @@ public class DungeonGame {
             switch (input) {
                 case "w":
                     exited = true;
-                    move(MovementDirection.Up);
+                    inBattle = move(MovementDirection.Up);
                     break;
                 case "s":
                     exited = true;
-                    move(MovementDirection.Down);
+                    inBattle = move(MovementDirection.Down);
                     break;
                 case "a":
                     exited = true;
-                    move(MovementDirection.Left);
+                    inBattle = move(MovementDirection.Left);
                     break;
                 case "d":
                     exited = true;
-                    move(MovementDirection.Right);
-                    break;
-                default:
-                    System.out.print("Please type [W], [S], [A], or [D]!\n==> ");
+                    inBattle = move(MovementDirection.Right);
                     break;
             }
+            if (!exited)
+                System.out.print("Please type [W], [S], [A], or [D]!\n==> ");
         }
+
+        return inBattle;
     }
-    private void move(MovementDirection direction) {
+    // Returns if in battle or not
+    private boolean move(MovementDirection direction) {
         try {
             map.movePlayer(direction);
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("\nYou can’t move through a wall!");
         }
 
-        map.enterRoom(scanner, player.getPositionX(), player.getPositionY());
+        return map.enterRoom(scanner, player.getPositionX(), player.getPositionY());
+    }
+    // Returns if in battle or not
+    private boolean battle() {
+        System.out.print("\n\nYou are in battle!\nType anything to continue ==> ");
+        scanner.next();
+        System.out.println("\n");
+        return map.enterRoom(scanner, player.getPositionX(), player.getPositionY());
     }
 }
